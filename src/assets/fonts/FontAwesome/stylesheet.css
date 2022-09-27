@@ -1,0 +1,52 @@
+@font-face {
+	font-family: 'FontAwesome';
+	src: url('fa-light-300.woff');
+	font-weight: 300;
+}
+@font-face {
+	font-family: 'FontAwesome';
+	src: url('fa-regular-400.woff');
+	font-weight: 400;
+}
+@font-face {
+	font-family: 'FontAwesome Brands';
+	src: url('fa-brands-400.woff');
+	font-weight: 400;
+}
+@font-face {
+	font-family: 'FontAwesome Duotone';
+	src: url('fa-duotone-900.woff');
+	font-weight: 900;
+}
+@font-face {
+	font-family: 'FontAwesome Solid';
+	src: url('fa-solid-900.woff');
+	font-weight: 900;
+}
+
+.fa,
+.far{
+    font-family: 'FontAwesome';
+    font-weight: 400;
+    font-style: normal;
+}
+.fas{
+    font-family: 'FontAwesome Solid';
+    font-weight: 900;
+    font-style: normal;
+}
+.fab{
+    font-family: 'FontAwesome Brands';
+    font-weight: 400;
+    font-style: normal;
+}
+.fad{
+    font-family: 'FontAwesome Duotone';
+    font-weight: 900;
+    font-style: normal;
+}
+.fal{
+    font-family: 'FontAwesome';
+    font-weight: 300;
+    font-style: normal;
+}

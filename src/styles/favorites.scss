@@ -1,0 +1,108 @@
+$blue: #1e93ff;
+$gray: #9d9d9d;
+$swipeAnimationTime: 0.4s;
+
+.phone__favorites{
+  width: 100%;
+  padding: 22px 10px;
+  font-family: 'SF';
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  &_page{
+    width: 100%;
+  }
+  &_info{
+    transition: $swipeAnimationTime ease-in-out;
+    &.swipe {
+      transform: translateX(-100%);
+    }
+  }
+  &_title{
+    font-size: 25px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    margin-left: 12px;
+  }
+  &_list{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 14px;
+    &_item{
+      width: 100%;
+      display: flex;
+      align-items: center;
+
+      &:nth-of-type(n){
+        & > .phone__favorites_list_item_body{
+          border-top: 1px rgba(128, 128, 128, 0.15) solid;
+        border-bottom: 1px rgba(128, 128, 128, 0.15) solid;
+        }
+      }
+      &_body{
+        padding: 8px 0;
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      &_avatar{
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: linear-gradient(90deg, #a2a4b3, #8e8e96);
+        overflow: hidden;
+        position: relative;
+        margin-right: 10px;
+        &::before{
+          content: attr(avatar-letter);
+          font-family: 'SF';
+          font-size: 14px;
+          font-weight: 300;
+          color: white;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+      }
+      &_text_block{
+        display: flex;
+        flex-direction: column;
+      }
+      &_name{
+        font-size: 17px;
+        font-weight: 500;
+        color: black;
+        margin-right: 5px;
+        &_block{
+          display: flex;
+          align-items: center;
+          & > i{
+            font-size: 12px;
+            color: $blue;
+          }
+        }
+      }
+      &_number{
+        margin-top: 3px;
+        font-size: 12px;
+        color: $gray;
+      }
+      &_info{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        border: 1px $blue solid;
+        color: $blue;
+        font-size: 14px;
+        cursor: pointer;
+      }
+    }
+  }
+}

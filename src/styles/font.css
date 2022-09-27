@@ -1,0 +1,69 @@
+.icon-car::before{
+  content: '\f5e4';
+
+}
+.icon-car::after{
+  content: '\10f5e4';
+  position: absolute;
+  top: 0;
+  left: 0;
+
+}
+.icon-car{
+  position: relative;
+}
+.icon-trash::before{
+  content: '\f2ed';
+}
+.icon-times::before{
+  content: '\f00d';
+}
+.fa-search::before{
+  content: '\f002';
+}
+.ios-star{
+  width: 100px;
+}
+.fa-plus::before{
+  content: '\f067';
+}
+.fa-chevron-left::before{
+  content: '\f053';
+}
+.fa-comment::before{
+  content: '\f075';
+}
+.fa-phone-alt::before{
+  content: '\f879';
+}
+.fa-video::before{
+  content: '\f03d';
+}
+.fa-envelope::before{
+  content: '\f0e0';
+}
+.fa-edit::before{
+  content: '\f044';
+}
+.fa-phone-alt::before{
+  content: '\f879';
+}
+.fa-backspace::before{
+  content: '\f55a';
+}
+.fa-long-arrow-up::before{
+  content: '\f176';
+}
+.fa-clone::before{
+  content: '\f24d';
+}
+.fa-trash::before{
+  content: '\f1f8';
+}
+
+.fa-user-plus::before{
+  content: '\f234';
+}
+.fa-star::before{
+  content: '\f005';
+}
