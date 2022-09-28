@@ -1,3 +1,5 @@
+import { createNewContact } from "./contacts";
+
 export class Recents {
   private phonePages;
   constructor() {
@@ -106,7 +108,7 @@ export class Recents {
         const itemName = document.createElement('h3');
         itemName.className = 'phone__recents_item_name';
         itemName.textContent = info.name;
-        itemNameBlock.append(itemName)
+        itemNameBlock.append(itemName);
 
         if (info.isFavorite) {
           const itemNameFavIcon = document.createElement('i');
@@ -151,6 +153,9 @@ export class Recents {
           itemInfoCopyBtnText.textContent = 'Copy number to clipboard';
           itemInfoCopyBtn.append(itemInfoCopyBtnIcon, itemInfoCopyBtnText);
           itemInfoWrapper.append(itemInfoCopyBtn);
+          itemInfoCopyBtn.onclick = () => {
+            window.prompt('Copy to clipboard: Ctrl+C, Enter',info.number)
+          };
 
           const itemInfoDeleteBtn = document.createElement('div');
           itemInfoDeleteBtn.className =
@@ -189,6 +194,9 @@ export class Recents {
           itemInfoAddBtnText.className = 'phone__recents_item_info_btn_text';
           itemInfoAddBtn.append(itemInfoAddBtnIcon, itemInfoAddBtnText);
           itemInfoWrapper.append(itemInfoAddBtn);
+          itemInfoAddBtn.addEventListener('click', ()=>{
+            createNewContact(recentsWrapper,info.number)
+          })
         });
       }
     }
