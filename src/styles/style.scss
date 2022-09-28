@@ -218,6 +218,29 @@ a{
     }
   }
 }
+.author{
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+  font-family: 'SF';
+  &__text{
+    font-size: 16px;
+    color: $gray;
+  }
+  &__link{
+    font-family: 'SF';
+    font-size: 16px;
+    color: rgb(65, 65, 65);
+    font-weight: 800;
+    margin-left: 5px;
+    text-decoration: underline;
+  }
+}
 @keyframes fade {
   0% {
     opacity: 0;
