@@ -1,7 +1,7 @@
 export const defaultContacts = [
   {
     name: 'Alexander',
-    number: '998909678310',
+    number: '64234532784',
     email: 'alexander299ru@gmail.com',
     id: 0,
     isFavorite: true,
@@ -109,7 +109,7 @@ export const defaultRecents = [
   {
     name: 'Unknown',
     number: '142423111568',
-    date: '23/5/2022/12:43:07',
+    date: '23/5/2022/14:11:43',
     mode: 'outcome',
   },
   {

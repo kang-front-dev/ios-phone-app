@@ -7,7 +7,9 @@ $gray: #9d9d9d;
   flex-direction: column;
   align-items: center;
   &_contact{
-    
+    &_wrapper{
+      height: 50px;
+    }
     &_block{
       background: #f0f0f0;
       border-radius: 8px;

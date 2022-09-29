@@ -1,4 +1,4 @@
-import { createNewContact } from "./contacts";
+import { createNewContact } from './contacts';
 
 export class Recents {
   private phonePages;
@@ -154,7 +154,7 @@ export class Recents {
           itemInfoCopyBtn.append(itemInfoCopyBtnIcon, itemInfoCopyBtnText);
           itemInfoWrapper.append(itemInfoCopyBtn);
           itemInfoCopyBtn.onclick = () => {
-            window.prompt('Copy to clipboard: Ctrl+C, Enter',info.number)
+            window.prompt('Copy to clipboard: Ctrl+C, Enter', info.number);
           };
 
           const itemInfoDeleteBtn = document.createElement('div');
@@ -194,9 +194,9 @@ export class Recents {
           itemInfoAddBtnText.className = 'phone__recents_item_info_btn_text';
           itemInfoAddBtn.append(itemInfoAddBtnIcon, itemInfoAddBtnText);
           itemInfoWrapper.append(itemInfoAddBtn);
-          itemInfoAddBtn.addEventListener('click', ()=>{
-            createNewContact(recentsWrapper,info.number)
-          })
+          itemInfoAddBtn.addEventListener('click', () => {
+            createNewContact(recentsWrapper, info.number);
+          });
         });
       }
     }
@@ -204,10 +204,10 @@ export class Recents {
 }
 
 export function addToRecents(info) {
+  const date = new Date();
   if (localStorage.getItem('recents')) {
     const recentsData = JSON.parse(localStorage.getItem('recents'));
 
-    const date = new Date();
     const hours =
       date.getHours() < 10 ? `0${date.getHours()}` : date.getHours();
     const minutes =
@@ -215,8 +215,10 @@ export function addToRecents(info) {
     const seconds =
       date.getSeconds() < 10 ? `0${date.getSeconds()}` : date.getSeconds();
     const newData = info;
-    newData.date = `${hours}:${minutes}:${seconds}`;
+    newData.date = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}/${hours}:${minutes}:${seconds}`;
     newData.mode = 'outcome';
+    console.log(date.getMonth(), date);
+
     // const newData = {
     //   name: info.name,
     //   number: info.number,
@@ -229,7 +231,6 @@ export function addToRecents(info) {
 
     localStorage.setItem('recents', JSON.stringify(recentsData));
   } else {
-    const date = new Date();
     const hours =
       date.getHours() < 10 ? `0${date.getHours()}` : date.getHours();
     const minutes =
@@ -238,7 +239,7 @@ export function addToRecents(info) {
       date.getSeconds() < 10 ? `0${date.getSeconds()}` : date.getSeconds();
 
     const newData = info;
-    newData.date = `${hours}:${minutes}:${seconds}`;
+    newData.date = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}/${hours}:${minutes}:${seconds}`;
     newData.mode = 'outcome';
 
     localStorage.setItem('recents', JSON.stringify([newData]));

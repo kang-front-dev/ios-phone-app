@@ -1,4 +1,5 @@
 import { createNewContact } from './contacts';
+import { addToRecents } from './recents';
 export class Keypad {
   private phonePages;
   constructor() {
@@ -8,26 +9,9 @@ export class Keypad {
     keypadWrapper.className = 'phone__keypad phone__page active';
     this.phonePages.append(keypadWrapper);
 
-    const keypadContactBlock = document.createElement('a');
-    keypadContactBlock.className = 'phone__keypad_contact_block';
-    keypadWrapper.append(keypadContactBlock);
-    const keypadContactAvatar = document.createElement('img');
-    keypadContactAvatar.className = 'phone__keypad_contact_avatar';
-    keypadContactAvatar.src = 'assets/img/avatar.png';
-    const keypadContactRight = document.createElement('div');
-    keypadContactRight.className = 'phone__keypad_contact_right';
-    const keypadContactNameBlock = document.createElement('div');
-    keypadContactNameBlock.className = 'phone__keypad_contact_name_block';
-    const keypadContactName = document.createElement('h3');
-    keypadContactName.className = 'phone__keypad_contact_name';
-    keypadContactNameBlock.append(keypadContactName)
-    const keypadContactFavIcon = document.createElement('i')
-    keypadContactFavIcon.className = 'fas fa-star'
-    keypadContactNameBlock.append(keypadContactFavIcon)
-    const keypadContactNumber = document.createElement('p');
-    keypadContactNumber.className = 'phone__keypad_contact_number';
-    keypadContactRight.append(keypadContactNameBlock, keypadContactNumber);
-    keypadContactBlock.append(keypadContactAvatar, keypadContactRight);
+    const keypadContactWrapper = document.createElement('div')
+    keypadContactWrapper.className = 'phone__keypad_contact_wrapper'
+    keypadWrapper.append(keypadContactWrapper)
 
     const keypadInputBlock = document.createElement('div');
     keypadInputBlock.className = 'phone__keypad_input_block';
@@ -77,7 +61,9 @@ export class Keypad {
         if (keypadInput.value.length < 16) {
           keypadInput.value += itemInfo[0];
         }
-
+        if (document.querySelector('.phone__keypad_contact_block')) {
+          document.querySelector('.phone__keypad_contact_block').remove();
+        }
         this.showupRelevantContact(keypadInput.value);
       });
       keypad.append(key);
@@ -100,7 +86,7 @@ export class Keypad {
       if (localStorage.getItem('recents')) {
         const recentsData = JSON.parse(localStorage.getItem('recents'));
 
-        let number = keypadInput.value
+        let number = keypadInput.value;
         if (number.includes('+')) {
           number = number.split('');
           number.shift();
@@ -125,7 +111,7 @@ export class Keypad {
 
         localStorage.setItem('recents', JSON.stringify(recentsData));
       } else {
-        let number = keypadInput.value
+        let number = keypadInput.value;
         if (number.includes('+')) {
           number = number.split('');
           number.shift();
@@ -163,28 +149,32 @@ export class Keypad {
     });
   }
   showupRelevantContact(key) {
-    const keypadContactBlock = document.querySelector(
-      '.phone__keypad_contact_block'
-    );
-    const keypadContactAvatar = document.querySelector(
-      '.phone__keypad_contact_avatar'
-    ) as HTMLImageElement;
-    const keypadContactName = document.querySelector(
-      '.phone__keypad_contact_name'
-    );
-    const keypadContactFavIcon = keypadContactBlock.querySelector(
-      '.fa-star'
-    );
-    const keypadContactNumber = document.querySelector(
-      '.phone__keypad_contact_number'
-    );
+    const keypadContactWrapper = document.querySelector('.phone__keypad_contact_wrapper');
+    const keypadContactBlock = document.createElement('a');
+    keypadContactBlock.className = 'phone__keypad_contact_block';
+    keypadContactWrapper.append(keypadContactBlock);
+    const keypadContactAvatar = document.createElement('img');
+    keypadContactAvatar.className = 'phone__keypad_contact_avatar';
+    keypadContactAvatar.src = 'assets/img/avatar.png';
+    const keypadContactRight = document.createElement('div');
+    keypadContactRight.className = 'phone__keypad_contact_right';
+    const keypadContactNameBlock = document.createElement('div');
+    keypadContactNameBlock.className = 'phone__keypad_contact_name_block';
+    const keypadContactName = document.createElement('h3');
+    keypadContactName.className = 'phone__keypad_contact_name';
+    keypadContactNameBlock.append(keypadContactName);
+    const keypadContactFavIcon = document.createElement('i');
+    keypadContactFavIcon.className = 'fas fa-star';
+    keypadContactNameBlock.append(keypadContactFavIcon);
+    const keypadContactNumber = document.createElement('p');
+    keypadContactNumber.className = 'phone__keypad_contact_number';
+    keypadContactRight.append(keypadContactNameBlock, keypadContactNumber);
+    keypadContactBlock.append(keypadContactAvatar, keypadContactRight);
 
     if (keypadContactBlock.classList.contains('active')) {
       keypadContactBlock.classList.remove('active');
       keypadContactBlock.classList.add('disabled');
-
     }
-
 
     const contactsData = JSON.parse(localStorage.getItem('contacts'));
     const target = contactsData.find((el) => {
@@ -193,33 +183,34 @@ export class Keypad {
         numKey = key.split('');
         numKey.shift();
         numKey = numKey.join('');
-      }else{
-        numKey = key
+      } else {
+        numKey = key;
       }
 
       if (numKey.length > 0) {
         if (el.number.includes(numKey)) {
-
           return el;
-        }else{
-          return false
+        } else {
+          return false;
         }
       }
     });
 
     if (target) {
       keypadContactBlock.classList.add('active');
-      keypadContactBlock.href = `tel:${target.number}`
-
+      keypadContactBlock.href = `tel:${target.number}`;
+      keypadContactBlock.addEventListener('click', () => {
+        addToRecents(target);
+      });
       if (target.avatarImgData) {
         keypadContactAvatar.src = target.avatarImgData;
-      }else{
+      } else {
         keypadContactAvatar.src = 'assets/img/avatar.png';
       }
       if (target.isFavorite) {
-        keypadContactFavIcon.classList.add('active')
-      }else{
-        keypadContactFavIcon.classList.remove('active')
+        keypadContactFavIcon.classList.add('active');
+      } else {
+        keypadContactFavIcon.classList.remove('active');
       }
       keypadContactName.textContent = target.name;
       keypadContactNumber.textContent = `+${target.number}`;
@@ -227,11 +218,10 @@ export class Keypad {
         keypadContactBlock.classList.remove('disabled');
         keypadContactBlock.classList.add('active');
       }, 150);
-    }else{
-      keypadContactBlock.href = ''
+    } else {
+      keypadContactBlock.href = '';
       keypadContactBlock.classList.remove('active');
       keypadContactBlock.classList.add('disabled');
     }
-
   }
 }
