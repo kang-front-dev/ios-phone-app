@@ -149,6 +149,9 @@ export class Keypad {
     });
   }
   showupRelevantContact(key) {
+    if(document.querySelector('.phone__keypad_contact_block')){
+      document.querySelector('.phone__keypad_contact_block').remove()
+    }
     const keypadContactWrapper = document.querySelector('.phone__keypad_contact_wrapper');
     const keypadContactBlock = document.createElement('a');
     keypadContactBlock.className = 'phone__keypad_contact_block';
@@ -214,14 +217,6 @@ export class Keypad {
       }
       keypadContactName.textContent = target.name;
       keypadContactNumber.textContent = `+${target.number}`;
-      setTimeout(() => {
-        keypadContactBlock.classList.remove('disabled');
-        keypadContactBlock.classList.add('active');
-      }, 150);
-    } else {
-      keypadContactBlock.href = '';
-      keypadContactBlock.classList.remove('active');
-      keypadContactBlock.classList.add('disabled');
     }
   }
 }
