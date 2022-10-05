@@ -2,6 +2,14 @@
   .phone__wrapper{
     transform: scale(0.9);
   }
+  .author{
+    &__text{
+      font-size: 14px;
+    }
+    &__link{
+      font-size: 14px;
+    }
+  }
 }
 @media(max-width: 360px){
   .phone__wrapper{

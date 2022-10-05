@@ -86,7 +86,7 @@ export class Keypad {
       if (localStorage.getItem('recents')) {
         const recentsData = JSON.parse(localStorage.getItem('recents'));
 
-        let number = keypadInput.value;
+        let number:string | Array<string> = keypadInput.value;
         if (number.includes('+')) {
           number = number.split('');
           number.shift();
@@ -111,7 +111,7 @@ export class Keypad {
 
         localStorage.setItem('recents', JSON.stringify(recentsData));
       } else {
-        let number = keypadInput.value;
+        let number:string | Array<string> = keypadInput.value;
         if (number.includes('+')) {
           number = number.split('');
           number.shift();
