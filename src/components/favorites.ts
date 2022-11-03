@@ -29,8 +29,6 @@ export class Favorites {
           contactsData[i].hasOwnProperty('isFavorite') &&
           contactsData[i].isFavorite
         ) {
-          console.log('wew');
-
           generateFavorite(contactsData[i], favoritesList);
         }
       }
@@ -42,13 +40,8 @@ export function generateFavorite(info, parent) {
   const favoritesAndInfoWrapper = document.querySelector('.phone__favorites');
   const item = document.createElement('a');
   item.className = 'phone__favorites_list_item';
-  item.href = `tel:${info.number}`
   parent.append(item);
   item.id = `favorite-${info.id}`;
-
-  item.addEventListener('click',()=>{
-    addToRecents(info)
-  })
 
   const avatar = document.createElement('div');
   avatar.className = 'phone__favorites_list_item_avatar';
@@ -101,7 +94,15 @@ export function generateFavorite(info, parent) {
   infoIcon.textContent = 'i';
   itemBody.append(infoIcon);
 
+  item.addEventListener('click',(e)=>{
+    if(e.target !== infoIcon){
+      item.href = `tel:${info.number}`
+      addToRecents(info)
+    }
+  })
+
   infoIcon.addEventListener('click', () => {
     generateContactInfo(info, favoritesAndInfoWrapper);
   });
+
 }

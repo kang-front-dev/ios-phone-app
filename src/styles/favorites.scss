@@ -34,7 +34,7 @@ $swipeAnimationTime: 0.4s;
       width: 100%;
       display: flex;
       align-items: center;
-
+      cursor: pointer;
       &:nth-of-type(n){
         & > .phone__favorites_list_item_body{
           border-top: 1px rgba(128, 128, 128, 0.15) solid;

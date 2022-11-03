@@ -79,7 +79,6 @@ export class Recents {
         }
       }
       function createItems(info) {
-        console.log(info);
 
         const item = document.createElement('div');
         item.className = `phone__recents_item`;
@@ -205,43 +204,25 @@ export class Recents {
 
 export function addToRecents(info) {
   const date = new Date();
+  const hours = date.getHours() < 10 ? `0${date.getHours()}` : date.getHours();
+  const minutes =
+    date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes();
+  const seconds =
+    date.getSeconds() < 10 ? `0${date.getSeconds()}` : date.getSeconds();
+
+  const newData = info;
+  newData.date = `${date.getDate()}/${
+    date.getMonth() + 1
+  }/${date.getFullYear()}/${hours}:${minutes}:${seconds}`;
+  newData.mode = 'outcome';
+
   if (localStorage.getItem('recents')) {
     const recentsData = JSON.parse(localStorage.getItem('recents'));
-
-    const hours =
-      date.getHours() < 10 ? `0${date.getHours()}` : date.getHours();
-    const minutes =
-      date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes();
-    const seconds =
-      date.getSeconds() < 10 ? `0${date.getSeconds()}` : date.getSeconds();
-    const newData = info;
-    newData.date = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}/${hours}:${minutes}:${seconds}`;
-    newData.mode = 'outcome';
-    console.log(date.getMonth(), date);
-
-    // const newData = {
-    //   name: info.name,
-    //   number: info.number,
-    //   date: `${hours}:${minutes}:${seconds}`,
-    //   mode: 'outcome',
-    //   id: info.id,
-    // };
 
     recentsData.push(newData);
 
     localStorage.setItem('recents', JSON.stringify(recentsData));
   } else {
-    const hours =
-      date.getHours() < 10 ? `0${date.getHours()}` : date.getHours();
-    const minutes =
-      date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes();
-    const seconds =
-      date.getSeconds() < 10 ? `0${date.getSeconds()}` : date.getSeconds();
-
-    const newData = info;
-    newData.date = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}/${hours}:${minutes}:${seconds}`;
-    newData.mode = 'outcome';
-
     localStorage.setItem('recents', JSON.stringify([newData]));
   }
 }

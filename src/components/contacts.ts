@@ -351,7 +351,6 @@ export function generateContactInfo(info, parent) {
       });
     } else if (item[0] === 'Delete contact') {
       action.addEventListener('click', () => {
-        console.log(infoIndex, 'trying to delete');
 
         contactsData.splice(infoIndex, 1);
         localStorage.setItem('contacts', JSON.stringify(contactsData));
